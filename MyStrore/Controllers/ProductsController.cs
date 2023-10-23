@@ -1,0 +1,81 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using MyStrore.Data;
+using MyStrore.Services;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace MyStrore.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ProductsController : ControllerBase
+    {
+        private readonly IProductsServices _productsServices;
+        public ProductsController(IProductsServices productsServices)
+        {
+           _productsServices = productsServices;
+        }
+        // GET: api/<ProductsController>
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var products = await _productsServices.GetAllAsynsc();
+            return Ok(products);
+        }
+
+        // GET api/<ProductsController>/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(string id)
+        {
+            var products = await _productsServices.GetById(id);
+            if (products == null)
+            {
+                return NotFound();
+            }
+            return Ok(products);
+        }
+
+        // POST api/<ProductsController>
+        [HttpPost]
+        public async Task<IActionResult> Post(Products products)
+        {
+            await _productsServices.CreateAsync(products);
+            return Ok("created successfully");
+        }
+
+        // PUT api/<ProductsController>/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(string id, [FromBody] Products newproducts)
+        {
+           
+
+            var existingproduct = await _productsServices.GetById(id);
+            if (existingproduct == null)
+            {
+                return NotFound();
+            }
+
+            // Kiểm tra xem id trong newcategory có giống với id truyền vào không
+            if (newproducts.Id != id)
+            {
+                // Trường Id không thể chỉnh sửa
+                return BadRequest("Cannot update Id");
+            }
+
+            await _productsServices.UpdateAsync(id,  newproducts);
+            return Ok("Updated successfully");
+        }
+
+        // DELETE api/<ProductsController>/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete (string id)
+        {
+            var products = await _productsServices.GetById(id);
+            if (products == null)
+
+                return NotFound();
+            await _productsServices.DeleteAysnc(id);
+            return Ok("Delete successfully");
+        }
+    }
+}

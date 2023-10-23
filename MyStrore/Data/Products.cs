@@ -1,0 +1,32 @@
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MyStrore.Data
+{
+  
+    public class Products
+    {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+
+        [MaxLength(100)]
+        public string ?ProductName { get; set; }
+
+        [MaxLength(200)]
+        public string ?Description { get; set; }
+
+        public double Price { get; set; }
+
+        public int Quantity { get; set; }
+
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? BrandId { get; set; }
+
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? CategoryId { get; set; }
+
+    }
+}
