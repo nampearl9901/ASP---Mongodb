@@ -7,7 +7,7 @@ using MyStrore.Services;
 
 namespace MyStrore.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/category")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
@@ -23,8 +23,9 @@ namespace MyStrore.Controllers
             return Ok(categories);
         }
 
+
         // GET api/Category/5
-        [HttpGet("{id}")]
+        [HttpGet("get/{id}")]
         public async Task<IActionResult> Get(string id)
         {
             var categories = await _categoryServices.GetById(id);
@@ -45,7 +46,7 @@ namespace MyStrore.Controllers
         }
 
         // PUT api/Category/5
-        [HttpPut("{id}")]
+        [HttpPut("put/{id}")]
         public async Task<IActionResult> Put(string id, [FromBody] Categories newcategory)
         {
             //var category = await _categoryServices.GetById(id);
@@ -73,7 +74,7 @@ namespace MyStrore.Controllers
         }
 
         // DELETE api/Category/5
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete (string id)
         {
             var category = await _categoryServices.GetById(id);

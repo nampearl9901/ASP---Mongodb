@@ -34,5 +34,17 @@ namespace MyStrore.Services
         public async Task DeleteAysnc(string id) =>
             await _products.DeleteOneAsync(a => a.Id == id);
 
+        //bybrnand
+        public async Task<List<Products>> GetProductsByBrandId(string brandId)
+        {
+            var filter = Builders<Products>.Filter.Eq(p => p.BrandId, brandId);
+            return await _products.Find(filter).ToListAsync();
+        }
+        //bycategory
+        public async Task<List<Products>> GetProductsByCategory(string categoryId)
+        {
+            var filter = Builders<Products>.Filter.Eq(p => p.CategoryId, categoryId);
+            return await _products.Find(filter).ToListAsync();
+        }
     }
 }

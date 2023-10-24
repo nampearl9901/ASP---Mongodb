@@ -6,7 +6,7 @@ using MyStrore.Services;
 
 namespace MyStrore.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/brands")]
     [ApiController]
 
     public class BrandsController : ControllerBase
@@ -17,7 +17,7 @@ namespace MyStrore.Controllers
             _brands = brandServices;
         }
         // GET: api/<BrandsController>
-        [HttpGet]
+        [HttpGet("getbrands")]
         public async Task<IActionResult> Get()
         {
             var brands = await _brands.GetAllAsynsc();
@@ -25,7 +25,7 @@ namespace MyStrore.Controllers
         }
 
         // GET api/<BrandsController>/5
-        [HttpGet("{id}")]
+        [HttpGet("get/{id}")]
         public async Task<IActionResult> Get(string id)
         {
             var brands = await _brands.GetById(id);
@@ -37,7 +37,7 @@ namespace MyStrore.Controllers
         }
 
         // POST api/<BrandsController>
-        [HttpPost]
+        [HttpPost("postbrand")]
         public async Task<IActionResult> Post(Brands brands)
         {
             await _brands.CreateAsync(brands);
@@ -45,7 +45,7 @@ namespace MyStrore.Controllers
         }
 
         // PUT api/<BrandsController>/5
-        [HttpPut("{id}")]
+        [HttpPut("put/{id}")]
         public async Task<IActionResult> Put(string id, [FromBody] Brands newbrands)
         {
             
@@ -67,7 +67,7 @@ namespace MyStrore.Controllers
         }
 
         // DELETE api/<BrandsController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(string id)
         {
             var brands = await _brands.GetById(id);

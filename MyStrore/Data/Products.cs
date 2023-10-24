@@ -15,9 +15,9 @@ namespace MyStrore.Data
         [MaxLength(100)]
         public string ?ProductName { get; set; }
 
-        [MaxLength(200)]
+        [MaxLength(500)]
         public string ?Description { get; set; }
-
+        public string ImageUrl { get; set; }
         public double Price { get; set; }
 
         public int Quantity { get; set; }

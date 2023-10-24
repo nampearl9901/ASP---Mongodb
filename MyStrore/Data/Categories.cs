@@ -13,8 +13,6 @@ namespace MyStrore.Data
         [MaxLength(100)]
         public string? CategoryName { get; set; }
 
-        // Danh sách ObjectId của các sản phẩm trong danh mục này
-        [BsonRepresentation(BsonType.ObjectId)]
-        public List<string> ?ProductIds { get; set; }
+    
     }
 }

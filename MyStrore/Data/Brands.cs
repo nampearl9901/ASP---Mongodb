@@ -15,8 +15,10 @@ public class Brands
         [MaxLength(100)]
         public string? BrandName { get; set; }
 
-        [BsonRepresentation(BsonType.ObjectId)]
-        public List<string> ?ProductIds { get; set; }
+        [MaxLength(500)]
+        public string? Description { get; set; }
+
+
 
     }
 }

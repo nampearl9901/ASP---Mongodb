@@ -19,10 +19,10 @@ public class CategoryServices : ICategoryServices
 
     }
     //
-    public async Task<IEnumerable<Categories>> GetAllAsynsc()=>
-        await _categories.Find(_ =>true).ToListAsync();
+  
+    public async Task<IEnumerable<Categories>> GetAllAsynsc() =>
+    await _categories.Find(_ => true).ToListAsync();
 
-   
     public async Task<Categories> GetById(string id) =>
         await _categories.Find(a => a.Id == id).FirstOrDefaultAsync();
 

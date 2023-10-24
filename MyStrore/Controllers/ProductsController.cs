@@ -6,7 +6,7 @@ using MyStrore.Services;
 
 namespace MyStrore.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/products")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
@@ -24,7 +24,7 @@ namespace MyStrore.Controllers
         }
 
         // GET api/<ProductsController>/5
-        [HttpGet("{id}")]
+        [HttpGet("get/{id}")]
         public async Task<IActionResult> Get(string id)
         {
             var products = await _productsServices.GetById(id);
@@ -44,7 +44,7 @@ namespace MyStrore.Controllers
         }
 
         // PUT api/<ProductsController>/5
-        [HttpPut("{id}")]
+        [HttpPut("put/{id}")]
         public async Task<IActionResult> Put(string id, [FromBody] Products newproducts)
         {
            
@@ -67,7 +67,7 @@ namespace MyStrore.Controllers
         }
 
         // DELETE api/<ProductsController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete (string id)
         {
             var products = await _productsServices.GetById(id);
@@ -77,5 +77,32 @@ namespace MyStrore.Controllers
             await _productsServices.DeleteAysnc(id);
             return Ok("Delete successfully");
         }
+
+        [HttpGet("byBrand/{brandId}")]
+        public async Task<IActionResult> GetProductsByBrandId(string brandId)
+        {
+            var products = await _productsServices.GetProductsByBrandId(brandId);
+            if (products == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(products);
+        }
+      
+        [HttpGet("byCategory/{categoryId}")]
+        public async Task<IActionResult> GetProductsByCategory(string categoryId)
+        {
+            var products = await _productsServices.GetProductsByCategory(categoryId);
+            if (products == null || products.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(products);
+        }
+
+
+
     }
 }

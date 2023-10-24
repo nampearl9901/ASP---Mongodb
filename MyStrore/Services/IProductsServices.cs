@@ -11,5 +11,7 @@ namespace MyStrore.Services
 
         Task UpdateAsync(string id, Products products);
         Task DeleteAysnc(string id);
+        Task<List<Products>> GetProductsByBrandId(string brandId);
+        Task<List<Products>> GetProductsByCategory(string categoryId);
     }
 }
